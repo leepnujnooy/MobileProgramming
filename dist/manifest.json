@@ -1,0 +1,1 @@
+{"name":"todo-mobile","short_name":"todo-mobile","theme_color":"#000000","icons":[{"src":"./img/icons/icon.png","sizes":"512x512","type":"image/png","purpose":"maskable"},{"src":"./img/icons/apple-touch-icon-180x180.png","sizes":"180x180","type":"image/png","purpose":"any"}],"start_url":"","display":"standalone","background_color":"#000000","orientation":"portrait","scope":"."}
