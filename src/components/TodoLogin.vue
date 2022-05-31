@@ -1,11 +1,12 @@
 <template>
-<v-app>
-    <v-app-bar app color="#6A76AB" dark>
+<v-app style=" background-image: url('/img/icons/backcolor.png')">
+    <v-app-bar app color="transparent" dark>
     <div class="d-flex align-center">
         <v-img
         alt="Vuetify Logo"
         class="shrink mr-2"
         contain
+        src="/img/icons/noteicn.png"
         transition="scale-transition"
         width="40"
         />
@@ -14,30 +15,45 @@
     <v-spacer></v-spacer>
 
     <v-btn text>
-        <span>More</span>
-        <v-icon>mdi-menu</v-icon>
+        <span></span>
+        <v-icon color="white">mdi-dots-vertical</v-icon>
     </v-btn>
     </v-app-bar>
 
     <v-main>
-    <v-form
-        ><v-container
-        ><v-row>
-            <v-col cols="6" sm="3">
-            <v-text-field v-model="email" label="email"></v-text-field>
+        
+    <v-form>
+        <v-container>
+            <div>
+                <v-img src="/img/icons/noteicn.png" transition="scale-transition"/>
+                <h2>{{ msg }}</h2>
+            </div>
+                
+            <v-row align="center" justify="center">
+                <v-col cols="6" sm="3">
+                <v-text-field v-model="email" label="email" hint="이메일 형식으로 입력"
+                >
+                </v-text-field>
+                </v-col>
+                <v-col cols="6" sm="3">
+                <v-text-field
+                    v-model="password"
+                    label="Password"
+                    hint="6자 이상의 숫자"
+                    counter
+                    >
+                </v-text-field>
+                
             </v-col>
-            <v-col cols="6" sm="3">
-            <v-text-field
-                v-model="password"
-                label="Password"
-                hint="At least 6 characters"
-                counter
-            ></v-text-field>
-            </v-col> </v-row></v-container
-    ></v-form>
-    <v-btn outlined @click="addUser"> Signup </v-btn>
-    <v-btn outlined @click="login"> Login </v-btn>
-    <h1>{{ msg }}</h1>
+            </v-row>
+            </v-container>
+    </v-form>
+    <v-btn outlined @click="addUser"> 회원가입 </v-btn>
+    <v-btn outlined @click="login"> 로그인 </v-btn>
+    <v-btn>
+        
+    </v-btn>
+
     </v-main>
 </v-app>
 </template>
@@ -53,7 +69,7 @@ onAuthStateChanged,
 export default {
 data() {
     return {
-    msg: "hi",
+    msg: "할일 어플리케이션",
     auth: getAuth(),
     email: "",
     password: "",

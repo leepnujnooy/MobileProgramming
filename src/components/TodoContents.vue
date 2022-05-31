@@ -1,12 +1,12 @@
 <template>
-<v-app>
-    <v-app-bar app color="#6A76AB" dark >
+<v-app style=" background-image: url('/img/icons/backcolor.png')">
+    <v-app-bar app color="transparent" dark >
     <div class="d-flex align-center">
         <v-img
         alt="Vuetify Logo"
         class="shrink mr-2"
         contain
-        src=""
+        src="/img/icons/noteicn.png"
         transition="scale-transition"
         width="40"
         />
