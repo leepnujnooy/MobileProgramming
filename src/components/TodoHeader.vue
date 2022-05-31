@@ -1,7 +1,7 @@
 <template>
 <v-container>
   <v-row justify="center">  
-    <h1>TODO it!</h1>  
+    <h1>내가 할 일</h1>  
   </v-row>
 </v-container>
 </template>

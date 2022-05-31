@@ -13,9 +13,7 @@
     </div>
 
     <v-spacer></v-spacer>
-        <v-btn color="#8763FB" dark @click="logout" >LOG OUT
-        <v-icon dark center></v-icon>
-        </v-btn>
+    
     <v-btn text>
         <span></span>
         <v-icon color="white">mdi-dots-vertical</v-icon>
@@ -45,7 +43,8 @@ import TodoFooter from "../components/TodoFooter.vue";
 import TodoHeader from "../components/TodoHeader.vue";
 import TodoList from "../components/TodoList.vue";
 import TodoInput from "../components/TodoInput.vue";
-import { getAuth, onAuthStateChanged ,signOut} from "firebase/auth";
+
+
 
 export default {
 name: "App",
@@ -60,8 +59,7 @@ components: {
 data() {
     return {
     todoItems: [],
-    name:"",
-    auth: getAuth()
+    name:""
     };
 },
 methods: {
@@ -93,11 +91,6 @@ methods: {
     toggleComplete(todoItem){
     todoItem.completed = !todoItem.completed;
     localStorage.setItem(todoItem.item,JSON.stringify(todoItem))
-    },
-    logout: function() {
-        const auth = getAuth();
-        signOut(auth).then(()=>{this.$router.replace({path:"/"})})
-    
     }
 },
 created() {
@@ -106,19 +99,9 @@ created() {
         this.todoItems.push(localStorage.key(i));
     }
     }
-    onAuthStateChanged(this.auth, (user) => {
-    if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/firebase.User
-        this.name = user.email;
-        // ...
-    } else {
-        this.$router.replace({path:"/"});
-        // ...
-    }
-    });
+},
 }
-};
+
 </script>
 
 <style>
@@ -135,4 +118,3 @@ box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.03);
 }
 </style>
 
-<!--this.$router.replace({path:"/"})-->

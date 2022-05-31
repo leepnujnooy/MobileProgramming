@@ -21,6 +21,8 @@ const firebaseConfig = {
   appId: "1:592940296101:web:da6b90c3ddcc498e6e6a4c"
 };
 
+//kakao
+window.Kakao.init('e212faf0342f3c761d20b063dacfc9fa');
 // Initialize Firebase
 initializeApp(firebaseConfig);
 

@@ -30,28 +30,32 @@
             </div>
                 
             <v-row align="center" justify="center">
-                <v-col cols="6" sm="3">
-                <v-text-field v-model="email" label="email" hint="이메일 형식으로 입력"
+                <v-col cols="6" sm="3" >
+                <v-text-field
+                solo-inverted 
+                v-model="email" 
+                label="email" 
+                hint="이메일 형식으로 입력"
                 >
                 </v-text-field>
                 </v-col>
                 <v-col cols="6" sm="3">
                 <v-text-field
+                    solo-inverted
                     v-model="password"
                     label="Password"
                     hint="6자 이상의 숫자"
-                    counter
-                    >
+                    counter>
                 </v-text-field>
                 
             </v-col>
             </v-row>
             </v-container>
     </v-form>
-    <v-btn outlined @click="addUser"> 회원가입 </v-btn>
-    <v-btn outlined @click="login"> 로그인 </v-btn>
-    <v-btn>
-        
+    <v-btn outlined @click="addUser"> 회원가입 </v-btn><br>
+    <v-btn outlined @click="login"> 로그인 </v-btn><br><br>
+    <v-btn icon @click="loginWithKakao">
+        <v-img src="/img/icons/loginkakao.jpeg"/>
     </v-btn>
 
     </v-main>
@@ -69,7 +73,7 @@ onAuthStateChanged,
 export default {
 data() {
     return {
-    msg: "할일 어플리케이션",
+    msg: "",
     auth: getAuth(),
     email: "",
     password: "",
@@ -81,7 +85,7 @@ methods: {
         .then((userCredential) => {
           // Signed in
           //var user = userCredential.user;
-        this.msg = "loggined as " + userCredential.user.email;
+        this.msg = "로그인 성공 , " + userCredential.user.email;
           // ...
         })
         .catch((error) => {
@@ -104,6 +108,12 @@ methods: {
         this.msg = error;
         });
     },
+    loginWithKakao() {
+        const params = {
+            redirectUri: "https://mobprac.web.app/todoforkakao"
+        };
+        window.Kakao.Auth.authorize(params);
+    }
 },
 beforeCreate() {
     onAuthStateChanged(getAuth(), (user) => {
