@@ -13,7 +13,9 @@
     </div>
 
     <v-spacer></v-spacer>
-    
+        <v-btn color="#FFD400" dark @click="logoutWithKakao" >LOG OUT
+        <v-icon dark center></v-icon>
+        </v-btn>
     <v-btn text>
         <span></span>
         <v-icon color="white">mdi-dots-vertical</v-icon>
@@ -58,7 +60,6 @@ components: {
 
 data() {
     return {
-    todoItems: [],
     name:""
     };
 },
@@ -91,6 +92,10 @@ methods: {
     toggleComplete(todoItem){
     todoItem.completed = !todoItem.completed;
     localStorage.setItem(todoItem.item,JSON.stringify(todoItem))
+    },
+    logoutWithKakao() {
+        console.log(window.Kakao.Auth.getAccesstoken())
+
     }
 },
 created() {

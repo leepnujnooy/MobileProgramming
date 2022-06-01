@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import Modal from './common/AlertModal.vue'
+import Modal from './common/AlertModal.vue';
 
 export default {
   data() {
@@ -32,7 +32,7 @@ export default {
        //   item: this.newTodoItem,
        //   completed: false
        // }
-				this.$emit('addTodo',value)
+				this.$store.commit('addTodo',value)
         this.clearInput();
       } else {
         this.showModal = !this.showModal;

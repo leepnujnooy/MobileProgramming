@@ -59,40 +59,34 @@ components: {
 
 data() {
     return {
-    todoItems: [],
     name:"",
     auth: getAuth()
     };
 },
 methods: {
-    clearAll() {
-    localStorage.clear();
-    this.todoItems = [];
-    },
-    addTodo(todoItem) {
+//    clearAll() {
+//    localStorage.clear();
+//    this.todoItems = [];
+//    },
+//    addTodo(todoItem) {
       //localStorage.setItem(todoItem, JSON.stringify(value));//
-    localStorage.setItem(todoItem,todoItem)
+//    localStorage.setItem(todoItem,todoItem)
 
-    this.todoItems.push(todoItem);
-    },
-    removeTodo(todoItem, index) {
-    localStorage.removeItem(todoItem);
-    this.todoItems.splice(index, 1);
-    },
-    editTodo(todoItem,index,text) {
-    console.log(todoItem,index,text)
-    this.todoItems.splice(index,1,text)
-    localStorage.setItem(text,text)
-    localStorage.removeItem(todoItem,todoItem)
-    },
+//    this.todoItems.push(todoItem);
+//    },
+//    removeTodo(todoItem, index) {
+//    localStorage.removeItem(todoItem);
+//    this.todoItems.splice(index, 1);
+//    },
+//    editTodo(todoItem,index,text) {
+//    this.todoItems.splice(index,1,text)
+//    localStorage.setItem(text,text)
+//    localStorage.removeItem(todoItem,todoItem)
+//    },
     detailTodo(value,index,todoItem){
     console.log(value,index,todoItem)
     this.todoItems.splice(index,1,todoItem)
     localStorage.setItem(todoItem,value)
-    },
-    toggleComplete(todoItem){
-    todoItem.completed = !todoItem.completed;
-    localStorage.setItem(todoItem.item,JSON.stringify(todoItem))
     },
     logout: function() {
         const auth = getAuth();

@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <transition-group class="pl-0" name="list" tag="ul">
-      <v-card class="mb-2 " v-for="(todoItem, index) in propsdata" :key="todoItem">
+      <v-card class="mb-2 " v-for="(todoItem, index) in todos" :key="todoItem">
         <v-card-actions>
           <v-list-item>
             <v-list-item-avatar>
@@ -24,7 +24,7 @@
                 <v-icon>fa-solid fa-info</v-icon>
               </v-btn>
             </v-list-item-action>
-            <v-list-item-action @click="removeTodo(todoItem, index)">
+            <v-list-item-action @click="removeTodo({todoItem, index})">
               <v-btn icon>
                 <v-icon>mdi-close</v-icon>
               </v-btn>
@@ -36,7 +36,7 @@
         <modal v-if="editModal" @close="editModal = false">
           <h3 slot="header">수정</h3>
             <span slot="footer" >
-                수정할 내용을 입력하세요.<input type="text" v-model="editTodoObj.text" onfocus="this.select()" v-on:keypress.enter="editTodoAction()"><button type="button" @click="editTodoAction()">수정</button>
+                수정할 내용을 입력하세요.<input type="text" v-model="editTodoObj" onfocus="this.select()" v-on:keypress.enter="editTodoAction({editTodoObj,editTodoObjindex}),editModalFalse()"><button type="button" @click="editTodoAction({editTodoObj,editTodoObjindex,currentObj}),editModalFalse()">수정</button>
                 <i class="close-modal-btn fa fa-times" aria-hidden="true" @click="editModal = false"></i>
             </span>
         </modal>
@@ -54,19 +54,15 @@
 
 <script>
 import Modal from './common/ExportModal.vue'
+import {mapGetters, mapMutations} from 'vuex';
 export default {
-  props: ["propsdata"],
   data() {
     return {
       editModal : false,
       detailModal : false,
-      currentTodo: {
-      },
-      editTodoObj : {
-        key : '',
-        index : '',
-        text : ''
-      },
+      currentObj: [],
+      editTodoObj :[],
+      editTodoObjindex :[],
       detailTodoObj : {
         key: '',
         value : '',
@@ -76,41 +72,55 @@ export default {
   },
 
   methods: {
-    removeTodo(todoItem, index) {
-      this.$emit("removeTodo", todoItem, index);
-    },
+    // removeTodo(todoItem, index) {
+    //   this.$store.commit("removeTodo",
+    
+    //todoItem, index);
+    //},
+    ...mapMutations([
+      'removeTodo',
+      'editTodoAction'
+    ]),
     editTodo(todoItem,index) {
       console.log(todoItem,index)
-      this.editTodoObj.index = index
-      this.currentTodo = this.propsdata[index]
-      this.editTodoObj.text = this.currentTodo
-      this.editTodoObj.key = todoItem
+      this.editTodoObjindex = index
+      this.editTodoObj = todoItem
+      this.currentObj = todoItem
+      console.log(this.editTodoObj,this.editTodoObjindex,this.currentObj)
       this.editModal = !this.editModal
     },
-    editTodoAction() {
-      const obj = this.editTodoObj;
-      this.$emit("editTodo",obj.key,obj.index,obj.text)
+    editModalFalse(){
       this.editModal = false
     },
+//    editTodoAction() {
+//      const obj = this.editTodoObj;
+//      this.$store.commit("editTodojaction",obj.key,obj.index,obj.text)
+//      this.editModal = false
+//    },
     detailTodo(value,index) {
       this.detailTodoObj.index = index
       this.detailTodoObj.value = value
       this.currentTodo = this.propsdata[index]
       this.detailTodoObj.key = this.currentTodo
-      console.log(this.detailTodoObj.value,this.detailTodoObj.key)
       this.detailModal = !this.detailModal
     },
     detailTodoAction() {
       const obj2 = this.detailTodoObj;
-      this.$emit("detailTodo",obj2.value,obj2.index,obj2.key)
+      this.$store.commit("detailTodo",obj2.value,obj2.index,obj2.key)
       this.detailModal = false
-    },
-    toggleComplete(todoItem){
-      this.$emit("toggleComplete",todoItem)
     }
   },
   components : {
     Modal: Modal
+  },
+  computed:{
+    ...mapGetters({
+      'todos':'getTodos'
+    })
+
+//    todos(){
+//      return this.$store.getters.getTodos;
+//    }
   }
 };
 </script>

@@ -17,8 +17,8 @@ const router = new VueRouter({
     ]
 })
 //const kakaoHeader = {
-   // 'Authorization': '4938eec69e39c38d73e8bab8bdf2b639',
-   // 'Content-type': 'application/x-www-form-urlencoded;charset=utf-8',
+ //   'Authorization': '4938eec69e39c38d73e8bab8bdf2b639',
+  //  'Content-type': 'application/x-www-form-urlencoded;charset=utf-8',
 //};
 //const getKakaoToken = async (code) => {
 //    console.log('loginWithKakao');
